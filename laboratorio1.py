@@ -21,6 +21,48 @@ summary = {
 
 print(summary)
 
+##PREGUNTA 4.1
+top10_budget = (
+    df[["title", "budget"]]
+    .sort_values(by="budget", ascending=False)
+    .head(10)
+)
+
+print("Pregunta 4.1: Las 10 películas con mayor presupuesto")
+print(top10_budget)
+
+
+##Pregunta 4.2
+top10_revenue = (
+    df[["title", "revenue"]]
+    .sort_values(by="revenue", ascending=False)
+    .head(10)
+)
+print("Pregunta 4.2: Las 10 películas que más ingresos tuvieron")
+print(top10_revenue)
+
+##Pregunta 4.3
+# Película con mayor número de votos
+most_votes = (
+    df[["title", "voteCount"]]
+    .sort_values(by="voteCount", ascending=False)
+    .head(1)
+)
+
+print("Pregunta 4.3: Película con mas votos")
+print(most_votes)
+
+##Pregunta 4.4
+df_votes = df[df["voteCount"] > 0]
+
+worst_movie = (
+    df_votes[["title", "originalTitle", "voteAvg", "voteCount"]]
+    .sort_values(by=["voteAvg", "voteCount"], ascending=[True, False])
+    .head(1)
+)
+print("Pregunta 4.4: La peor película de acuerdo a los votos de todos los usuarios")
+print(worst_movie)
+
 """
 Laboratorio 1 - Ejercicio 3
 Analisis de Normalidad y Tablas de Frecuencia
