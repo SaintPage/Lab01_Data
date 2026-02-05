@@ -63,6 +63,117 @@ worst_movie = (
 print("Pregunta 4.4: La peor película de acuerdo a los votos de todos los usuarios")
 print(worst_movie)
 
+
+##Pregunta 4.5
+movies_per_year = df["releaseYear"].value_counts().sort_index()
+
+most_movies_year = movies_per_year.idxmax()
+most_movies_count = movies_per_year.max()
+
+most_movies_year, most_movies_count
+
+##grafico
+plt.figure()
+movies_per_year.plot(kind="bar")
+plt.xlabel("Año de lanzamiento")
+plt.ylabel("Cantidad de películas")
+plt.title("Cantidad de películas producidas por año")
+plt.show()
+
+##Pregunta 4.6
+df["mainGenre"] = df["genres"].str.split("|").str[0]
+df["releaseYear"] = pd.to_numeric(df["releaseYear"], errors="coerce")
+
+recent_20 = df.sort_values(by="releaseYear", ascending=False).head(20)
+genre_recent_20 = recent_20["mainGenre"].value_counts()
+
+plt.figure()
+genre_recent_20.plot(kind="bar")
+plt.xlabel("Género principal")
+plt.ylabel("Cantidad de películas")
+plt.title("Género principal de las 20 películas más recientes")
+plt.show()
+
+
+genre_overall = df["mainGenre"].value_counts()
+plt.figure()
+genre_overall.head(10).plot(kind="bar")
+plt.xlabel("Género principal")
+plt.ylabel("Cantidad de películas")
+plt.title("Géneros principales más frecuentes en el dataset")
+plt.show()
+
+longest_movies = df.sort_values(by="runtime", ascending=False).head(20)
+genre_longest = longest_movies["mainGenre"].value_counts()
+
+plt.figure()
+genre_longest.plot(kind="bar")
+plt.xlabel("Género principal")
+plt.ylabel("Cantidad de películas")
+plt.title("Género principal de las películas más largas")
+plt.show()
+
+##PRegunta 4.7
+df["mainGenre"] = df["genres"].str.split("|").str[0]
+df_revenue = df[df["revenue"] > 0]
+
+avg_revenue_by_genre = (
+    df_revenue
+    .groupby("mainGenre")["revenue"]
+    .mean()
+    .sort_values(ascending=False) / 1_000_000
+)
+
+plt.figure()
+avg_revenue_by_genre.head(10).plot(kind="bar")
+plt.xlabel("Género principal")
+plt.ylabel("Ingresos promedio (millones de USD)")
+plt.title("Ingresos promedio por género principal")
+plt.show()
+
+##pregunta 4.8
+df["actorsAmount"] = pd.to_numeric(df["actorsAmount"], errors="coerce")
+df["revenue"] = pd.to_numeric(df["revenue"], errors="coerce")
+
+# Filtrar valores válidos
+df_valid = df[(df["actorsAmount"] > 0) & (df["revenue"] > 0)].copy()
+
+# Agrupar por cantidad de actores
+df_valid["actorsGroup"] = pd.cut(
+    df_valid["actorsAmount"],
+    bins=[0, 5, 10, 20, 50, df_valid["actorsAmount"].max()],
+    labels=["1–5", "6–10", "11–20", "21–50", "50+"]
+)
+
+# Ingresos en millones
+df_valid["revenue_millions"] = df_valid["revenue"] / 1_000_000
+
+# Boxplot
+plt.figure()
+df_valid.boxplot(column="revenue_millions", by="actorsGroup")
+plt.xlabel("Cantidad de actores")
+plt.ylabel("Ingresos (millones de USD)")
+plt.title("Ingresos según cantidad de actores")
+plt.suptitle("")
+plt.show()
+
+
+# -----------------------------
+# 2) Evolución de actores en el tiempo
+# -----------------------------
+actors_by_year = (
+    df.groupby("releaseYear")["actorsAmount"]
+    .mean()
+    .dropna()
+)
+
+plt.figure()
+actors_by_year.plot(kind="line")
+plt.xlabel("Año de lanzamiento")
+plt.ylabel("Cantidad promedio de actores")
+plt.title("Evolución de la cantidad promedio de actores por año")
+plt.show()
+
 """
 Laboratorio 1 - Ejercicio 3
 Analisis de Normalidad y Tablas de Frecuencia
