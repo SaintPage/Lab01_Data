@@ -23,9 +23,7 @@ import seaborn as sns
 import os
 import warnings
 
-# ============================================================================
 # CONFIGURACIÓN INICIAL
-# ============================================================================
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)
@@ -38,9 +36,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
 
-# ============================================================================
 # FUNCIONES AUXILIARES
-# ============================================================================
 
 def print_section(title, char="="):
     """Imprime un título de sección con formato"""
@@ -53,7 +49,7 @@ def save_figure(filename):
     """Guarda una figura con formato consistente"""
     plt.tight_layout()
     plt.savefig(filename, dpi=300, bbox_inches='tight')
-    print(f"✓ Gráfico guardado: {filename}")
+    print(f" Gráfico guardado: {filename}")
 
 
 def load_data(filename):
@@ -72,24 +68,18 @@ def load_data(filename):
     raise Exception("Error: No se pudo cargar el archivo.")
 
 
-# ============================================================================
 # CARGA DE DATOS
-# ============================================================================
 
 print_section("LABORATORIO 1 - PARTE 2: NORMALIDAD Y FRECUENCIAS")
 
 df = load_data("movies_2026.csv")
 
 
-# ============================================================================
 # 3. ANÁLISIS DE NORMALIDAD Y FRECUENCIAS (6 puntos)
-# ============================================================================
 
 print_section("3. ANÁLISIS DE NORMALIDAD Y TABLAS DE FRECUENCIAS", "-")
 
-# ============================================================================
 # 3.A) PRUEBAS DE NORMALIDAD
-# ============================================================================
 
 print_section("3.A) PRUEBAS DE NORMALIDAD PARA VARIABLES CUANTITATIVAS", "·")
 
@@ -102,18 +92,18 @@ variables_cuantitativas = [
 
 variables_cuantitativas = [var for var in variables_cuantitativas if var in df.columns]
 
-print("📊 METODOLOGÍA:")
+print(" METODOLOGÍA:")
 print("  1. Test de Shapiro-Wilk: Para muestras pequeñas (n ≤ 5000)")
-print("     - Más preciso para muestras pequeñas")
-print("     - Sensible a desviaciones de normalidad")
+print("      Más preciso para muestras pequeñas")
+print("      Sensible a desviaciones de normalidad")
 print("\n  2. Test de Kolmogorov-Smirnov: Para muestras grandes (n > 5000)")
-print("     - Compara la distribución empírica con la normal")
-print("     - Útil para grandes volúmenes de datos")
+print("      Compara la distribución empírica con la normal")
+print("      Útil para grandes volúmenes de datos")
 
-print("\n📋 HIPÓTESIS DE LAS PRUEBAS:")
+print("\n HIPÓTESIS DE LAS PRUEBAS:")
 print("  H₀ (Hipótesis Nula): Los datos siguen una distribución normal")
 print("  H₁ (Hipótesis Alternativa): Los datos NO siguen una distribución normal")
-print("\n  ⚠️  CRITERIO DE DECISIÓN:")
+print("\n    CRITERIO DE DECISIÓN:")
 print("  Si p-value < 0.05 → Rechazamos H₀ → Los datos NO son normales")
 print("  Si p-value ≥ 0.05 → No rechazamos H₀ → Los datos podrían ser normales")
 
@@ -181,71 +171,71 @@ print("="*80)
 
 for idx, row in df_normalidad.iterrows():
     print(f"\n{'─'*80}")
-    print(f"📊 VARIABLE: {row['Variable'].upper()}")
+    print(f" VARIABLE: {row['Variable'].upper()}")
     print(f"{'─'*80}")
-    print(f"  📈 Estadísticas Descriptivas:")
-    print(f"    • Tamaño de muestra: {row['n']:,}")
-    print(f"    • Media: {row['Media']:.4f}")
-    print(f"    • Mediana: {row['Mediana']:.4f}")
-    print(f"    • Desviación estándar: {row['Desv.Est']:.4f}")
-    print(f"    • Asimetría (Skewness): {row['Asimetría']:.4f}")
-    print(f"    • Curtosis (Kurtosis): {row['Curtosis']:.4f}")
+    print(f"   Estadísticas Descriptivas:")
+    print(f"     Tamaño de muestra: {row['n']:,}")
+    print(f"     Media: {row['Media']:.4f}")
+    print(f"     Mediana: {row['Mediana']:.4f}")
+    print(f"     Desviación estándar: {row['Desv.Est']:.4f}")
+    print(f"     Asimetría (Skewness): {row['Asimetría']:.4f}")
+    print(f"     Curtosis (Kurtosis): {row['Curtosis']:.4f}")
     
     # Interpretar asimetría
-    print(f"\n  📐 Interpretación de Asimetría:")
+    print(f"\n   Interpretación de Asimetría:")
     if abs(row['Asimetría']) < 0.5:
-        print(f"    → Distribución aproximadamente simétrica")
+        print(f"     Distribución aproximadamente simétrica")
     elif row['Asimetría'] > 0:
-        print(f"    → Distribución sesgada a la DERECHA (cola larga hacia valores altos)")
-        print(f"    → Mayoría de datos concentrados en valores bajos")
+        print(f"     Distribución sesgada a la DERECHA (cola larga hacia valores altos)")
+        print(f"     Mayoría de datos concentrados en valores bajos")
     else:
-        print(f"    → Distribución sesgada a la IZQUIERDA (cola larga hacia valores bajos)")
-        print(f"    → Mayoría de datos concentrados en valores altos")
+        print(f"     Distribución sesgada a la IZQUIERDA (cola larga hacia valores bajos)")
+        print(f"     Mayoría de datos concentrados en valores altos")
     
     # Interpretar curtosis
-    print(f"\n  📊 Interpretación de Curtosis:")
+    print(f"\n   Interpretación de Curtosis:")
     if abs(row['Curtosis']) < 0.5:
-        print(f"    → Distribución mesocúrtica (similar a la normal)")
+        print(f"     Distribución mesocúrtica (similar a la normal)")
     elif row['Curtosis'] > 0:
-        print(f"    → Distribución leptocúrtica (más puntiaguda, con colas pesadas)")
-        print(f"    → Presencia de valores extremos (outliers)")
+        print(f"     Distribución leptocúrtica (más puntiaguda, con colas pesadas)")
+        print(f"     Presencia de valores extremos (outliers)")
     else:
-        print(f"    → Distribución platicúrtica (más aplanada)")
+        print(f"     Distribución platicúrtica (más aplanada)")
     
     if not np.isnan(row['Shapiro_p']):
-        print(f"\n  🔬 Test de Shapiro-Wilk:")
-        print(f"    • p-value: {row['Shapiro_p']:.6f}")
+        print(f"\n   Test de Shapiro-Wilk:")
+        print(f"    p-value: {row['Shapiro_p']:.6f}")
         if row['Shapiro_p'] < 0.05:
-            print(f"    • Conclusión: p < 0.05 → ✗ RECHAZAMOS H₀ → NO es normal")
+            print(f"     Conclusión: p < 0.05 → ✗ RECHAZAMOS H₀ → NO es normal")
         else:
-            print(f"    • Conclusión: p ≥ 0.05 → ✓ No rechazamos H₀ → Podría ser normal")
+            print(f"     Conclusión: p ≥ 0.05 → ✓ No rechazamos H₀ → Podría ser normal")
     
     if not np.isnan(row['KS_p']):
-        print(f"\n  🔬 Test de Kolmogorov-Smirnov:")
-        print(f"    • p-value: {row['KS_p']:.6f}")
+        print(f"\n   Test de Kolmogorov-Smirnov:")
+        print(f"     p-value: {row['KS_p']:.6f}")
         if row['KS_p'] < 0.05:
-            print(f"    • Conclusión: p < 0.05 → ✗ RECHAZAMOS H₀ → NO es normal")
+            print(f"     Conclusión: p < 0.05 → ✗ RECHAZAMOS H₀ → NO es normal")
         else:
-            print(f"    • Conclusión: p ≥ 0.05 → ✓ No rechazamos H₀ → Podría ser normal")
+            print(f"     Conclusión: p ≥ 0.05 → ✓ No rechazamos H₀ → Podría ser normal")
     
-    print(f"\n  🎯 VEREDICTO FINAL: {row['¿Normal?']}")
+    print(f"\n   VEREDICTO FINAL: {row['¿Normal?']}")
 
 print("\n" + "="*80)
 print("RESUMEN GENERAL DE NORMALIDAD")
 print("="*80)
 
-normales = df_normalidad[df_normalidad['¿Normal?'] == '✓ SÍ'].shape[0]
-no_normales = df_normalidad[df_normalidad['¿Normal?'] == '✗ NO'].shape[0]
+normales = df_normalidad[df_normalidad['¿Normal?'] == ' SÍ'].shape[0]
+no_normales = df_normalidad[df_normalidad['¿Normal?'] == ' NO'].shape[0]
 total = len(df_normalidad)
 
-print(f"\n📊 Estadísticas Generales:")
-print(f"  • Variables analizadas: {total}")
-print(f"  • Variables con distribución normal: {normales} ({normales/total*100:.1f}%)")
-print(f"  • Variables SIN distribución normal: {no_normales} ({no_normales/total*100:.1f}%)")
+print(f"\n Estadísticas Generales:")
+print(f"   Variables analizadas: {total}")
+print(f"   Variables con distribución normal: {normales} ({normales/total*100:.1f}%)")
+print(f"   Variables SIN distribución normal: {no_normales} ({no_normales/total*100:.1f}%)")
 
 if normales > 0:
-    print(f"\n✓ Variables NORMALES:")
-    for var in df_normalidad[df_normalidad['¿Normal?'] == '✓ SÍ']['Variable']:
+    print(f"\n Variables NORMALES:")
+    for var in df_normalidad[df_normalidad['¿Normal?'] == ' SÍ']['Variable']:
         print(f"    • {var}")
 
 if no_normales > 0:
@@ -258,47 +248,47 @@ print("💡 INTERPRETACIÓN Y EXPLICACIÓN DE RESULTADOS")
 print("="*80)
 
 print("""
-📋 ¿Por qué la mayoría de variables NO son normales?
+ ¿Por qué la mayoría de variables NO son normales?
 
-1. 🎬 NATURALEZA DE LOS DATOS DE PELÍCULAS:
+1.  NATURALEZA DE LOS DATOS DE PELÍCULAS:
    • La industria cinematográfica es altamente desigual
    • Pocas películas blockbusters generan ingresos masivos
    • La mayoría de películas tienen presupuestos e ingresos bajos
    • Esto genera distribuciones asimétricas con sesgo positivo
 
-2. 💰 DISTRIBUCIONES CON SESGO POSITIVO:
+2.  DISTRIBUCIONES CON SESGO POSITIVO:
    • Budget (Presupuesto): Muchas películas independientes con bajo presupuesto,
-     pocas superproducciones con presupuestos enormes
+    pocas superproducciones con presupuestos enormes
    • Revenue (Ingresos): Similar patrón - mayoría con ingresos bajos/moderados,
-     pocas con ingresos estratosféricos
+    pocas con ingresos estratosféricos
    • Popularity: Pocas películas extremadamente populares
 
-3. 🎯 VARIABLES CON VALORES EXTREMOS (OUTLIERS):
+3.  VARIABLES CON VALORES EXTREMOS (OUTLIERS):
    • VoteCount: Pocas películas tienen miles de votos
    • ActorsAmount: Mayoría con pocos actores, algunas con elencos masivos
    • Runtime: Mayoría 90-120 min, pero existen películas muy largas o muy cortas
 
-4. 📊 VARIABLES DISCRETAS LIMITADAS:
-   • GenresAmount: Limitado a pocos valores (1, 2, 3 géneros)
-   • ProductionCoAmount: Similar restricción natural
-   • Estas difícilmente pueden ser normales por su naturaleza discreta
+4. VARIABLES DISCRETAS LIMITADAS:
+    GenresAmount: Limitado a pocos valores (1, 2, 3 géneros)
+    ProductionCoAmount: Similar restricción natural
+   Estas difícilmente pueden ser normales por su naturaleza discreta
 
-5. 🌍 IMPLICACIONES PARA EL ANÁLISIS ESTADÍSTICO:
-   ✓ USAR: Estadísticas robustas (mediana, cuartiles, rangos intercuartílicos)
-   ✓ USAR: Pruebas no paramétricas (Mann-Whitney, Kruskal-Wallis, Spearman)
-   ✓ CONSIDERAR: Transformaciones logarítmicas para normalizar datos
-   ✗ EVITAR: Asumir normalidad para pruebas paramétricas (t-test, ANOVA, etc.)
-   ✗ EVITAR: Usar solo la media como medida de tendencia central
+5.  IMPLICACIONES PARA EL ANÁLISIS ESTADÍSTICO:
+    USAR: Estadísticas robustas (mediana, cuartiles, rangos intercuartílicos)
+    USAR: Pruebas no paramétricas (Mann-Whitney, Kruskal-Wallis, Spearman)
+    CONSIDERAR: Transformaciones logarítmicas para normalizar datos
+    EVITAR: Asumir normalidad para pruebas paramétricas (t-test, ANOVA, etc.)
+    EVITAR: Usar solo la media como medida de tendencia central
 
-6. 🔄 TRANSFORMACIONES RECOMENDADAS:
-   • Logaritmo: Para budget, revenue, popularity
-   • Raíz cuadrada: Para conteos (voteCount, actorsAmount)
-   • Box-Cox: Para normalización general
+6.  TRANSFORMACIONES RECOMENDADAS:
+    Logaritmo: Para budget, revenue, popularity
+    Raíz cuadrada: Para conteos (voteCount, actorsAmount)
+    Box-Cox: Para normalización general
 """)
 
 # Visualización de normalidad
 print("\n" + "="*80)
-print("📊 GENERANDO VISUALIZACIONES DE NORMALIDAD...")
+print(" GENERANDO VISUALIZACIONES DE NORMALIDAD...")
 print("="*80)
 
 n_vars = len(variables_cuantitativas)
@@ -336,19 +326,18 @@ for idx, var in enumerate(variables_cuantitativas):
 save_figure('imagenes/parte2_01_normalidad_histogramas_qqplots.png')
 plt.close()
 
-print("✓ Gráficos de normalidad guardados")
-print("\n💡 INTERPRETACIÓN DE GRÁFICOS:")
-print("  • Histograma: Muestra la distribución de frecuencias")
-print("    - Normal: Forma de campana simétrica")
-print("    - No normal: Asimetría, múltiples picos, colas largas")
-print("  • Q-Q Plot: Compara cuantiles teóricos vs observados")
-print("    - Normal: Puntos alineados en la línea diagonal")
-print("    - No normal: Desviaciones de la línea, curvaturas")
+print(" Gráficos de normalidad guardados")
+print("\n INTERPRETACIÓN DE GRÁFICOS:")
+print("   Histograma: Muestra la distribución de frecuencias")
+print("     Normal: Forma de campana simétrica")
+print("     No normal: Asimetría, múltiples picos, colas largas")
+print("   Q-Q Plot: Compara cuantiles teóricos vs observados")
+print("     Normal: Puntos alineados en la línea diagonal")
+print("     No normal: Desviaciones de la línea, curvaturas")
 
 
-# ============================================================================
 # 3.B) TABLAS DE FRECUENCIAS
-# ============================================================================
+# 
 
 print_section("3.B) TABLAS DE FRECUENCIAS DE VARIABLES CUALITATIVAS", "·")
 
@@ -361,7 +350,7 @@ variables_cualitativas = ['originalLanguage', 'video', 'releaseYear', 'genresAmo
 for var in variables_cualitativas:
     if var in df.columns:
         print(f"\n{'='*80}")
-        print(f"📊 TABLA DE FRECUENCIAS: {var.upper()}")
+        print(f" TABLA DE FRECUENCIAS: {var.upper()}")
         print(f"{'='*80}")
         
         # Calcular frecuencias
@@ -379,41 +368,41 @@ for var in variables_cualitativas:
             'Frec.Rel.Acum(%)': freq_rel_acum.values
         })
         
-        print("\n📋 TOP 20 CATEGORÍAS MÁS FRECUENTES:")
+        print("\n TOP 20 CATEGORÍAS MÁS FRECUENTES:")
         print(tabla.head(20).to_string(index=False))
         
         if len(tabla) > 20:
             print(f"\n  ... y {len(tabla) - 20} categorías adicionales")
         
-        print(f"\n📈 ESTADÍSTICAS DE LA VARIABLE:")
-        print(f"  • Total de categorías únicas: {len(freq_abs):,}")
-        print(f"  • Total de registros válidos: {freq_abs.sum():,}")
-        print(f"  • Valores nulos: {df[var].isnull().sum():,}")
-        print(f"  • Categoría más frecuente: {freq_abs.index[0]} ({freq_rel.values[0]:.2f}%)")
-        print(f"  • Categoría menos frecuente: {freq_abs.index[-1]} ({freq_rel.values[-1]:.2f}%)")
+        print(f"\n ESTADÍSTICAS DE LA VARIABLE:")
+        print(f"   Total de categorías únicas: {len(freq_abs):,}")
+        print(f"   Total de registros válidos: {freq_abs.sum():,}")
+        print(f"   Valores nulos: {df[var].isnull().sum():,}")
+        print(f"   Categoría más frecuente: {freq_abs.index[0]} ({freq_rel.values[0]:.2f}%)")
+        print(f"   Categoría menos frecuente: {freq_abs.index[-1]} ({freq_rel.values[-1]:.2f}%)")
         
         # Explicación específica por variable
-        print(f"\n💡 INTERPRETACIÓN:")
+        print(f"\n INTERPRETACIÓN:")
         if var == 'originalLanguage':
-            print(f"  • El inglés domina la producción cinematográfica global")
-            print(f"  • Refleja la hegemonía de Hollywood en la industria")
-            print(f"  • Otras lenguas representan nichos de mercado específicos")
+            print(f"   El inglés domina la producción cinematográfica global")
+            print(f"   Refleja la hegemonía de Hollywood en la industria")
+            print(f"   Otras lenguas representan nichos de mercado específicos")
         elif var == 'video':
-            print(f"  • Indica si la película fue lanzada directamente a video/streaming")
-            print(f"  • La mayoría son lanzamientos teatrales (cines)")
+            print(f"   Indica si la película fue lanzada directamente a video/streaming")
+            print(f"   La mayoría son lanzamientos teatrales (cines)")
         elif var == 'releaseYear':
-            print(f"  • Muestra la distribución temporal del dataset")
-            print(f"  • Permite identificar tendencias y evolución de la industria")
+            print(f"   Muestra la distribución temporal del dataset")
+            print(f"   Permite identificar tendencias y evolución de la industria")
         elif var == 'genresAmount':
-            print(f"  • Indica complejidad y diversidad del contenido")
-            print(f"  • Películas con múltiples géneros buscan atraer más audiencia")
+            print(f"   Indica complejidad y diversidad del contenido")
+            print(f"   Películas con múltiples géneros buscan atraer más audiencia")
         elif var == 'mainGenre':
-            print(f"  • Género predominante define la categorización principal")
-            print(f"  • Útil para análisis de mercado y preferencias")
+            print(f"   Género predominante define la categorización principal")
+            print(f"   Útil para análisis de mercado y preferencias")
 
 # Visualización de frecuencias
 print("\n" + "="*80)
-print("📊 GENERANDO VISUALIZACIONES DE FRECUENCIAS...")
+print(" GENERANDO VISUALIZACIONES DE FRECUENCIAS...")
 print("="*80)
 
 fig, axes = plt.subplots(2, 3, figsize=(18, 12))
@@ -483,52 +472,8 @@ if 'actorsAmount' in df.columns:
 save_figure('imagenes/parte2_02_tablas_frecuencias.png')
 plt.close()
 
-print("✓ Gráficos de frecuencias guardados")
+print(" Gráficos de frecuencias guardados")
 
 
-# ============================================================================
-# RESUMEN FINAL PARTE 2
-# ============================================================================
 
-print_section("RESUMEN FINAL - PARTE 2")
 
-print(f"""
-✅ PARTE 2 COMPLETADA
-
-📊 Pregunta 3: Análisis de Normalidad y Frecuencias
-
-   A) PRUEBAS DE NORMALIDAD:
-      ✓ {total} variables cuantitativas analizadas
-      ✓ Tests de Shapiro-Wilk y Kolmogorov-Smirnov aplicados
-      ✓ {normales} variables con distribución normal
-      ✓ {no_normales} variables sin distribución normal
-      ✓ Interpretaciones y explicaciones detalladas
-      ✓ Visualizaciones: Histogramas y Q-Q Plots generados
-
-   B) TABLAS DE FRECUENCIAS:
-      ✓ 5 variables cualitativas analizadas
-      ✓ Frecuencias absolutas y relativas calculadas
-      ✓ Frecuencias acumuladas incluidas
-      ✓ Interpretaciones específicas por variable
-      ✓ Visualizaciones: Gráficos de barras y pastel generados
-
-📁 ARCHIVOS GENERADOS (en carpeta imagenes/):
-   • parte2_01_normalidad_histogramas_qqplots.png
-   • parte2_02_tablas_frecuencias.png
-
-🎯 HALLAZGOS PRINCIPALES:
-   • La mayoría de variables NO siguen distribución normal
-   • Sesgo positivo predominante en variables monetarias
-   • Presencia de outliers en múltiples variables
-   • Se recomienda usar estadísticas robustas y pruebas no paramétricas
-   • Idioma inglés domina en frecuencias de idiomas
-   • Géneros múltiples son comunes en películas modernas
-
-📊 PRÓXIMOS PASOS:
-   → Ejecutar parte3_preguntas_4_1_a_4_9.py para preguntas específicas
-   → Ejecutar parte4_preguntas_4_10_a_4_16.py para preguntas finales
-""")
-
-print("="*80)
-print("PARTE 2 COMPLETADA".center(80))
-print("="*80)

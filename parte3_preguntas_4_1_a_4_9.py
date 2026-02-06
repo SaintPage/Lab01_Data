@@ -6,7 +6,7 @@ PREGUNTAS ESPECÍFICAS 4.1 - 4.9
 Universidad del Valle de Guatemala
 Facultad de Ingeniería
 Departamento de Ciencias de la Computación
-CC3074 – Minería de Datos
+Minería de Datos
 Semestre I – 2026
 
 Esta parte incluye las preguntas:
@@ -29,9 +29,7 @@ import seaborn as sns
 import os
 import warnings
 
-# ============================================================================
 # CONFIGURACIÓN INICIAL
-# ============================================================================
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)
@@ -44,9 +42,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
 
-# ============================================================================
 # FUNCIONES AUXILIARES
-# ============================================================================
 
 def print_section(title, char="="):
     """Imprime un título de sección con formato"""
@@ -59,7 +55,7 @@ def save_figure(filename):
     """Guarda una figura con formato consistente"""
     plt.tight_layout()
     plt.savefig(filename, dpi=300, bbox_inches='tight')
-    print(f"✓ Gráfico guardado: {filename}")
+    print(f" Gráfico guardado: {filename}")
 
 
 def load_data(filename):
@@ -78,9 +74,7 @@ def load_data(filename):
     raise Exception("Error: No se pudo cargar el archivo.")
 
 
-# ============================================================================
 # CARGA DE DATOS
-# ============================================================================
 
 print_section("LABORATORIO 1 - PARTE 3: PREGUNTAS 4.1 - 4.9")
 
@@ -91,9 +85,7 @@ if 'mainGenre' not in df.columns:
     df["mainGenre"] = df["genres"].str.split("|").str[0]
 
 
-# ============================================================================
 # 4.1. TOP 10 PELÍCULAS CON MAYOR PRESUPUESTO
-# ============================================================================
 
 print_section("4.1. ¿CUÁLES SON LAS 10 PELÍCULAS CON MÁS PRESUPUESTO?", "·")
 
@@ -103,18 +95,18 @@ top10_budget['budget_millions'] = top10_budget['budget'] / 1_000_000
 print("🎬 TOP 10 PELÍCULAS CON MAYOR PRESUPUESTO:\n")
 for i, (idx, row) in enumerate(top10_budget.iterrows(), 1):
     print(f"  {i}. {row['title']}")
-    print(f"     💰 Presupuesto: ${row['budget_millions']:.2f} millones")
-    print(f"     🎬 Director: {row['director']}")
-    print(f"     🎭 Género: {row['mainGenre']}")
-    print(f"     📅 Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}\n")
+    print(f"      Presupuesto: ${row['budget_millions']:.2f} millones")
+    print(f"      Director: {row['director']}")
+    print(f"      Género: {row['mainGenre']}")
+    print(f"      Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}\n")
 
 print("📊 ANÁLISIS:")
 total_top10 = top10_budget['budget_millions'].sum()
 promedio_top10 = top10_budget['budget_millions'].mean()
-print(f"  • Presupuesto total (Top 10): ${total_top10:,.2f} millones")
-print(f"  • Presupuesto promedio (Top 10): ${promedio_top10:,.2f} millones")
-print(f"  • Presupuesto más alto: ${top10_budget['budget_millions'].max():,.2f} millones")
-print(f"  • Presupuesto más bajo (del Top 10): ${top10_budget['budget_millions'].min():,.2f} millones")
+print(f"   Presupuesto total (Top 10): ${total_top10:,.2f} millones")
+print(f"   Presupuesto promedio (Top 10): ${promedio_top10:,.2f} millones")
+print(f"   Presupuesto más alto: ${top10_budget['budget_millions'].max():,.2f} millones")
+print(f"   Presupuesto más bajo (del Top 10): ${top10_budget['budget_millions'].min():,.2f} millones")
 
 # Gráfico
 plt.figure(figsize=(14, 8))
@@ -127,9 +119,9 @@ save_figure('imagenes/parte3_01_top10_presupuesto.png')
 plt.close()
 
 
-# ============================================================================
+
 # 4.2. TOP 10 PELÍCULAS CON MAYORES INGRESOS
-# ============================================================================
+
 
 print_section("4.2. ¿CUÁLES SON LAS 10 PELÍCULAS CON MAYORES INGRESOS?", "·")
 
@@ -142,15 +134,15 @@ top10_revenue['roi'] = (top10_revenue['profit_millions'] / top10_revenue['budget
 print("💰 TOP 10 PELÍCULAS CON MAYORES INGRESOS:\n")
 for i, (idx, row) in enumerate(top10_revenue.iterrows(), 1):
     print(f"  {i}. {row['title']}")
-    print(f"     💵 Ingresos: ${row['revenue_millions']:.2f} millones")
-    print(f"     💰 Presupuesto: ${row['budget_millions']:.2f} millones")
-    print(f"     💸 Ganancia: ${row['profit_millions']:.2f} millones")
-    print(f"     📈 ROI: {row['roi']:.1f}%")
-    print(f"     🎬 Director: {row['director']}")
-    print(f"     🎭 Género: {row['mainGenre']}")
-    print(f"     📅 Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}\n")
+    print(f"      Ingresos: ${row['revenue_millions']:.2f} millones")
+    print(f"      Presupuesto: ${row['budget_millions']:.2f} millones")
+    print(f"      Ganancia: ${row['profit_millions']:.2f} millones")
+    print(f"      ROI: {row['roi']:.1f}%")
+    print(f"      Director: {row['director']}")
+    print(f"      Género: {row['mainGenre']}")
+    print(f"      Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}\n")
 
-print("📊 ANÁLISIS:")
+print(" ANÁLISIS:")
 total_ingresos = top10_revenue['revenue_millions'].sum()
 promedio_ingresos = top10_revenue['revenue_millions'].mean()
 print(f"  • Ingresos totales (Top 10): ${total_ingresos:,.2f} millones")
@@ -169,30 +161,28 @@ save_figure('imagenes/parte3_02_top10_ingresos.png')
 plt.close()
 
 
-# ============================================================================
 # 4.3. PELÍCULA CON MÁS VOTOS
-# ============================================================================
 
 print_section("4.3. ¿CUÁL ES LA PELÍCULA QUE MÁS VOTOS TUVO?", "·")
 
 most_voted = df.nlargest(1, 'voteCount')[['title', 'voteCount', 'voteAvg', 'releaseYear', 
                                             'director', 'mainGenre', 'revenue']]
 
-print("🗳️ PELÍCULA CON MÁS VOTOS:\n")
+print(" PELÍCULA CON MÁS VOTOS:\n")
 for idx, row in most_voted.iterrows():
-    print(f"  🎬 Título: {row['title']}")
-    print(f"  🗳️  Votos: {int(row['voteCount']):,}")
-    print(f"  ⭐ Calificación promedio: {row['voteAvg']:.2f}/10")
-    print(f"  👤 Director: {row['director']}")
-    print(f"  🎭 Género: {row['mainGenre']}")
-    print(f"  📅 Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}")
+    print(f"   Título: {row['title']}")
+    print(f"    Votos: {int(row['voteCount']):,}")
+    print(f"   Calificación promedio: {row['voteAvg']:.2f}/10")
+    print(f"   Director: {row['director']}")
+    print(f"   Género: {row['mainGenre']}")
+    print(f"   Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}")
     if row['revenue'] > 0:
-        print(f"  💰 Ingresos: ${row['revenue']/1_000_000:.2f} millones")
+        print(f"   Ingresos: ${row['revenue']/1_000_000:.2f} millones")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • Alta cantidad de votos indica gran popularidad y audiencia masiva")
-print("  • Los usuarios se sintieron motivados a calificar la película")
-print("  • Refleja el impacto cultural y alcance de la película")
+print("\n INTERPRETACIÓN:")
+print("   Alta cantidad de votos indica gran popularidad y audiencia masiva")
+print("   Los usuarios se sintieron motivados a calificar la película")
+print("   Refleja el impacto cultural y alcance de la película")
 
 # Top 10 más votadas
 top10_votes = df.nlargest(10, 'voteCount')[['title', 'voteCount', 'voteAvg']]
@@ -206,9 +196,7 @@ save_figure('imagenes/parte3_03_mas_votadas.png')
 plt.close()
 
 
-# ============================================================================
 # 4.4. PEOR PELÍCULA SEGÚN VOTOS
-# ============================================================================
 
 print_section("4.4. ¿CUÁL ES LA PEOR PELÍCULA SEGÚN LOS VOTOS?", "·")
 
@@ -217,20 +205,20 @@ df_votes = df[df["voteCount"] >= 50]
 worst_movie = df_votes.nsmallest(1, 'voteAvg')[['title', 'originalTitle', 'voteAvg', 'voteCount', 
                                                   'releaseYear', 'director', 'mainGenre']]
 
-print("⭐ PEOR PELÍCULA (con al menos 50 votos para validez estadística):\n")
+print(" PEOR PELÍCULA (con al menos 50 votos para validez estadística):\n")
 for idx, row in worst_movie.iterrows():
-    print(f"  🎬 Título: {row['title']}")
-    print(f"  🎬 Título original: {row['originalTitle']}")
-    print(f"  ⭐ Calificación: {row['voteAvg']:.2f}/10")
-    print(f"  🗳️  Votos: {int(row['voteCount']):,}")
-    print(f"  👤 Director: {row['director']}")
-    print(f"  🎭 Género: {row['mainGenre']}")
-    print(f"  📅 Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}")
+    print(f"   Título: {row['title']}")
+    print(f"   Título original: {row['originalTitle']}")
+    print(f"   Calificación: {row['voteAvg']:.2f}/10")
+    print(f"    Votos: {int(row['voteCount']):,}")
+    print(f"   Director: {row['director']}")
+    print(f"   Género: {row['mainGenre']}")
+    print(f"   Año: {int(row['releaseYear']) if pd.notna(row['releaseYear']) else 'N/A'}")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • Se requieren al menos 50 votos para evitar outliers estadísticos")
-print("  • Una película con pocos votos y baja calificación no es representativa")
-print("  • Calificación muy baja indica rechazo generalizado de la audiencia")
+print("\n INTERPRETACIÓN:")
+print("   Se requieren al menos 50 votos para evitar outliers estadísticos")
+print("   Una película con pocos votos y baja calificación no es representativa")
+print("   Calificación muy baja indica rechazo generalizado de la audiencia")
 
 # Top 10 peores calificadas
 worst10 = df_votes.nsmallest(10, 'voteAvg')[['title', 'voteAvg', 'voteCount']]
@@ -245,9 +233,7 @@ save_figure('imagenes/parte3_04_peores_calificadas.png')
 plt.close()
 
 
-# ============================================================================
 # 4.5. PELÍCULAS POR AÑO
-# ============================================================================
 
 print_section("4.5. ¿CUÁNTAS PELÍCULAS SE HICIERON EN CADA AÑO?", "·")
 
@@ -255,23 +241,23 @@ movies_per_year = df['releaseYear'].value_counts().sort_index()
 most_movies_year = movies_per_year.idxmax()
 most_movies_count = movies_per_year.max()
 
-print(f"📊 ESTADÍSTICAS POR AÑO:\n")
-print(f"  🏆 Año con MÁS películas: {int(most_movies_year)}")
-print(f"  📈 Cantidad: {most_movies_count:,} películas")
-print(f"\n  📉 Año con MENOS películas: {int(movies_per_year.idxmin())}")
-print(f"  📊 Cantidad: {movies_per_year.min():,} películas")
-print(f"\n  📊 Promedio películas por año: {movies_per_year.mean():.1f}")
-print(f"  📊 Mediana películas por año: {movies_per_year.median():.1f}")
-print(f"  📊 Total de años en el dataset: {len(movies_per_year)}")
+print(f" ESTADÍSTICAS POR AÑO:\n")
+print(f"   Año con MÁS películas: {int(most_movies_year)}")
+print(f"   Cantidad: {most_movies_count:,} películas")
+print(f"\n   Año con MENOS películas: {int(movies_per_year.idxmin())}")
+print(f"   Cantidad: {movies_per_year.min():,} películas")
+print(f"\n   Promedio películas por año: {movies_per_year.mean():.1f}")
+print(f"   Mediana películas por año: {movies_per_year.median():.1f}")
+print(f"   Total de años en el dataset: {len(movies_per_year)}")
 
-print(f"\n📋 PELÍCULAS POR AÑO (Últimos 20 años):")
+print(f"\n PELÍCULAS POR AÑO (Últimos 20 años):")
 for year, count in movies_per_year.tail(20).items():
     print(f"  {int(year)}: {count:,} películas")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • El año con más películas refleja un boom en la industria")
-print("  • Puede correlacionarse con avances tecnológicos o eventos globales")
-print("  • Tendencia creciente indica expansión de la industria cinematográfica")
+print("\n INTERPRETACIÓN:")
+print("   El año con más películas refleja un boom en la industria")
+print("   Puede correlacionarse con avances tecnológicos o eventos globales")
+print("   Tendencia creciente indica expansión de la industria cinematográfica")
 
 # Gráfico completo
 plt.figure(figsize=(16, 6))
@@ -290,9 +276,7 @@ save_figure('imagenes/parte3_05_peliculas_por_anio.png')
 plt.close()
 
 
-# ============================================================================
 # 4.6. ANÁLISIS DE GÉNEROS
-# ============================================================================
 
 print_section("4.6. ANÁLISIS DE GÉNEROS PRINCIPALES", "·")
 
@@ -300,17 +284,17 @@ print_section("4.6. ANÁLISIS DE GÉNEROS PRINCIPALES", "·")
 recent_20 = df.nlargest(20, 'releaseYear')
 genre_recent_20 = recent_20['mainGenre'].value_counts()
 
-print("🎬 GÉNERO DE LAS 20 PELÍCULAS MÁS RECIENTES:\n")
+print(" GÉNERO DE LAS 20 PELÍCULAS MÁS RECIENTES:\n")
 for genre, count in genre_recent_20.items():
     pct = (count / 20) * 100
     print(f"  • {genre}: {count} películas ({pct:.1f}%)")
 
 # Género predominante en todo el dataset
 genre_overall = df['mainGenre'].value_counts()
-print(f"\n🏆 GÉNERO PREDOMINANTE EN TODO EL DATASET:")
-print(f"  • {genre_overall.index[0]}: {genre_overall.values[0]:,} películas ({genre_overall.values[0]/len(df)*100:.1f}%)")
+print(f"\n GÉNERO PREDOMINANTE EN TODO EL DATASET:")
+print(f"   {genre_overall.index[0]}: {genre_overall.values[0]:,} películas ({genre_overall.values[0]/len(df)*100:.1f}%)")
 
-print(f"\n📊 TOP 10 GÉNEROS MÁS FRECUENTES:")
+print(f"\n TOP 10 GÉNEROS MÁS FRECUENTES:")
 for i, (genre, count) in enumerate(genre_overall.head(10).items(), 1):
     pct = (count / len(df)) * 100
     print(f"  {i}. {genre}: {count:,} películas ({pct:.1f}%)")
@@ -319,22 +303,22 @@ for i, (genre, count) in enumerate(genre_overall.head(10).items(), 1):
 longest_movies = df.nlargest(20, 'runtime')
 genre_longest = longest_movies['mainGenre'].value_counts()
 
-print(f"\n⏱️  GÉNERO DE LAS 20 PELÍCULAS MÁS LARGAS:\n")
+print(f"\n GÉNERO DE LAS 20 PELÍCULAS MÁS LARGAS:\n")
 for genre, count in genre_longest.items():
     pct = (count / 20) * 100
-    print(f"  • {genre}: {count} películas ({pct:.1f}%)")
+    print(f"   {genre}: {count} películas ({pct:.1f}%)")
 
 # Duración promedio por género
 runtime_by_genre = df.groupby('mainGenre')['runtime'].mean().sort_values(ascending=False)
-print(f"\n⏱️  DURACIÓN PROMEDIO POR GÉNERO (Top 10):")
+print(f"\n DURACIÓN PROMEDIO POR GÉNERO (Top 10):")
 for genre, duration in runtime_by_genre.head(10).items():
     print(f"  • {genre}: {duration:.1f} minutos")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • Género de películas recientes muestra tendencias actuales del mercado")
-print("  • Género predominante refleja preferencias históricas de la industria")
-print("  • Géneros como Drama tienden a tener duraciones más largas")
-print("  • Action y Adventure suelen tener duraciones estándar (90-120 min)")
+print("\n INTERPRETACIÓN:")
+print("   Género de películas recientes muestra tendencias actuales del mercado")
+print("   Género predominante refleja preferencias históricas de la industria")
+print("   Géneros como Drama tienden a tener duraciones más largas")
+print("   Action y Adventure suelen tener duraciones estándar (90-120 min)")
 
 # Gráficos
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
@@ -367,9 +351,7 @@ save_figure('imagenes/parte3_06_analisis_generos.png')
 plt.close()
 
 
-# ============================================================================
 # 4.7. INGRESOS POR GÉNERO
-# ============================================================================
 
 print_section("4.7. ¿QUÉ GÉNERO OBTUVO MAYORES GANANCIAS?", "·")
 
@@ -387,7 +369,7 @@ total_revenue_by_genre = df_revenue.groupby('mainGenre')['revenue_millions'].sum
 # Ganancias netas por género
 avg_profit_by_genre = df_revenue.groupby('mainGenre')['profit_millions'].mean().sort_values(ascending=False)
 
-print("💰 INGRESOS PROMEDIO POR GÉNERO (Top 10):\n")
+print("INGRESOS PROMEDIO POR GÉNERO (Top 10):\n")
 for i, (genre, revenue) in enumerate(avg_revenue_by_genre.head(10).items(), 1):
     count = df_revenue[df_revenue['mainGenre'] == genre].shape[0]
     print(f"  {i}. {genre}: ${revenue:.2f} millones (basado en {count:,} películas)")
@@ -397,15 +379,15 @@ for i, (genre, revenue) in enumerate(total_revenue_by_genre.head(10).items(), 1)
     count = df_revenue[df_revenue['mainGenre'] == genre].shape[0]
     print(f"  {i}. {genre}: ${revenue:,.0f} millones totales ({count:,} películas)")
 
-print("\n💵 GANANCIA NETA PROMEDIO POR GÉNERO (Top 10):\n")
+print("\n GANANCIA NETA PROMEDIO POR GÉNERO (Top 10):\n")
 for i, (genre, profit) in enumerate(avg_profit_by_genre.head(10).items(), 1):
     print(f"  {i}. {genre}: ${profit:.2f} millones de ganancia promedio")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • Géneros con altos ingresos promedio pero pocas películas son nichos rentables")
-print("  • Géneros con altos ingresos totales dominan el mercado")
-print("  • Ganancia neta muestra eficiencia: ingresos menos presupuesto")
-print("  • Action y Adventure suelen tener alto ROI por su atractivo masivo")
+print("\n INTERPRETACIÓN:")
+print("   Géneros con altos ingresos promedio pero pocas películas son nichos rentables")
+print("   Géneros con altos ingresos totales dominan el mercado")
+print("   Ganancia neta muestra eficiencia: ingresos menos presupuesto")
+print("   Action y Adventure suelen tener alto ROI por su atractivo masivo")
 
 # Gráficos
 fig, axes = plt.subplots(1, 2, figsize=(16, 6))
@@ -430,9 +412,7 @@ save_figure('imagenes/parte3_07_ingresos_por_genero.png')
 plt.close()
 
 
-# ============================================================================
 # 4.8. CANTIDAD DE ACTORES VS INGRESOS
-# ============================================================================
 
 print_section("4.8. ¿LA CANTIDAD DE ACTORES INFLUYE EN LOS INGRESOS?", "·")
 
@@ -441,7 +421,7 @@ df_actors['revenue_millions'] = df_actors['revenue'] / 1_000_000
 
 # Correlación
 corr_actors = df_actors['actorsAmount'].corr(df_actors['revenue_millions'])
-print(f"📊 CORRELACIÓN actoresAmount vs ingresos: {corr_actors:.4f}\n")
+print(f" CORRELACIÓN actoresAmount vs ingresos: {corr_actors:.4f}\n")
 
 if abs(corr_actors) < 0.3:
     interpretacion_corr = "débil o casi nula"
@@ -465,12 +445,12 @@ df_actors['actorsGroup'] = pd.cut(df_actors['actorsAmount'],
 
 actors_group_stats = df_actors.groupby('actorsGroup')['revenue_millions'].agg(['mean', 'median', 'count'])
 
-print(f"\n📊 INGRESOS POR RANGO DE ACTORES:\n")
+print(f"\n INGRESOS POR RANGO DE ACTORES:\n")
 for group, row in actors_group_stats.iterrows():
     print(f"  {group} actores:")
-    print(f"    • Promedio: ${row['mean']:.2f} millones")
-    print(f"    • Mediana: ${row['median']:.2f} millones")
-    print(f"    • Películas: {int(row['count']):,}")
+    print(f"     Promedio: ${row['mean']:.2f} millones")
+    print(f"     Mediana: ${row['median']:.2f} millones")
+    print(f"     Películas: {int(row['count']):,}")
 
 # Evolución de cantidad de actores por año
 actors_by_year = df.groupby('releaseYear')['actorsAmount'].mean()
@@ -478,20 +458,20 @@ recent_avg = actors_by_year.tail(10).mean()
 old_avg = actors_by_year.head(10).mean()
 trend_pct = ((recent_avg / old_avg) - 1) * 100
 
-print(f"\n📈 EVOLUCIÓN TEMPORAL:")
-print(f"  • Promedio actores (primeros 10 años): {old_avg:.1f}")
-print(f"  • Promedio actores (últimos 10 años): {recent_avg:.1f}")
-print(f"  • Cambio: {trend_pct:+.1f}%")
+print(f"\n EVOLUCIÓN TEMPORAL:")
+print(f"   Promedio actores (primeros 10 años): {old_avg:.1f}")
+print(f"   Promedio actores (últimos 10 años): {recent_avg:.1f}")
+print(f"   Cambio: {trend_pct:+.1f}%")
 
 if trend_pct > 0:
-    print(f"  • SÍ, se han hecho películas con más actores en años recientes")
+    print(f"   SÍ, se han hecho películas con más actores en años recientes")
 else:
-    print(f"  • NO, la cantidad de actores se ha mantenido o reducido")
+    print(f"   NO, la cantidad de actores se ha mantenido o reducido")
 
-print("\n💡 INTERPRETACIÓN:")
-print("  • Elencos grandes pueden indicar películas de alto presupuesto")
-print("  • No necesariamente garantizan éxito comercial")
-print("  • La calidad del guión y dirección son factores más determinantes")
+print("\n INTERPRETACIÓN:")
+print("   Elencos grandes pueden indicar películas de alto presupuesto")
+print("   No necesariamente garantizan éxito comercial")
+print("   La calidad del guión y dirección son factores más determinantes")
 
 # Gráficos
 fig, axes = plt.subplots(1, 2, figsize=(16, 6))
@@ -515,9 +495,7 @@ save_figure('imagenes/parte3_08_actores_vs_ingresos.png')
 plt.close()
 
 
-# ============================================================================
 # 4.9. GÉNERO DEL REPARTO VS INGRESOS Y POPULARIDAD
-# ============================================================================
 
 print_section("4.9. ¿INFLUYE EL GÉNERO DEL REPARTO EN POPULARIDAD E INGRESOS?", "·")
 
@@ -533,21 +511,21 @@ corr_men_revenue = df_cast['castMenAmount'].corr(df_cast['revenue_millions'])
 corr_women_pop = df_cast['castWomenAmount'].corr(df_cast['popularity'])
 corr_men_pop = df_cast['castMenAmount'].corr(df_cast['popularity'])
 
-print(f"📊 CORRELACIONES CON INGRESOS:\n")
-print(f"  • Cantidad de mujeres vs ingresos: {corr_women_revenue:.4f}")
-print(f"  • Cantidad de hombres vs ingresos: {corr_men_revenue:.4f}")
+print(f" CORRELACIONES CON INGRESOS:\n")
+print(f"   Cantidad de mujeres vs ingresos: {corr_women_revenue:.4f}")
+print(f"   Cantidad de hombres vs ingresos: {corr_men_revenue:.4f}")
 
-print(f"\n📊 CORRELACIONES CON POPULARIDAD:\n")
-print(f"  • Cantidad de mujeres vs popularidad: {corr_women_pop:.4f}")
-print(f"  • Cantidad de hombres vs popularidad: {corr_men_pop:.4f}")
+print(f"\n CORRELACIONES CON POPULARIDAD:\n")
+print(f"   Cantidad de mujeres vs popularidad: {corr_women_pop:.4f}")
+print(f"   Cantidad de hombres vs popularidad: {corr_men_pop:.4f}")
 
 # Estadísticas generales
-print(f"\n📊 ESTADÍSTICAS GENERALES DEL REPARTO:\n")
-print(f"  • Promedio mujeres por película: {df_cast['castWomenAmount'].mean():.1f}")
-print(f"  • Promedio hombres por película: {df_cast['castMenAmount'].mean():.1f}")
-print(f"  • Porcentaje promedio de mujeres: {df_cast['women_pct'].mean():.1f}%")
-print(f"  • Mediana mujeres: {df_cast['castWomenAmount'].median():.0f}")
-print(f"  • Mediana hombres: {df_cast['castMenAmount'].median():.0f}")
+print(f"\n ESTADÍSTICAS GENERALES DEL REPARTO:\n")
+print(f"   Promedio mujeres por película: {df_cast['castWomenAmount'].mean():.1f}")
+print(f"   Promedio hombres por película: {df_cast['castMenAmount'].mean():.1f}")
+print(f"   Porcentaje promedio de mujeres: {df_cast['women_pct'].mean():.1f}%")
+print(f"   Mediana mujeres: {df_cast['castWomenAmount'].median():.0f}")
+print(f"   Mediana hombres: {df_cast['castMenAmount'].median():.0f}")
 
 # Categorizar por porcentaje de mujeres
 df_cast['women_category'] = pd.cut(df_cast['women_pct'],
@@ -557,36 +535,36 @@ df_cast['women_category'] = pd.cut(df_cast['women_pct'],
 revenue_by_women = df_cast.groupby('women_category')['revenue_millions'].agg(['mean', 'median', 'count'])
 popularity_by_women = df_cast.groupby('women_category')['popularity'].agg(['mean', 'median'])
 
-print(f"\n💰 INGRESOS POR % DE MUJERES EN EL REPARTO:\n")
+print(f"\n INGRESOS POR % DE MUJERES EN EL REPARTO:\n")
 for cat, row in revenue_by_women.iterrows():
     print(f"  {cat} mujeres:")
-    print(f"    • Ingresos promedio: ${row['mean']:.2f} millones")
-    print(f"    • Ingresos mediana: ${row['median']:.2f} millones")
-    print(f"    • Películas: {int(row['count']):,}")
+    print(f"     Ingresos promedio: ${row['mean']:.2f} millones")
+    print(f"     Ingresos mediana: ${row['median']:.2f} millones")
+    print(f"     Películas: {int(row['count']):,}")
 
-print(f"\n⭐ POPULARIDAD POR % DE MUJERES EN EL REPARTO:\n")
+print(f"\n POPULARIDAD POR % DE MUJERES EN EL REPARTO:\n")
 for cat, row in popularity_by_women.iterrows():
     print(f"  {cat} mujeres:")
-    print(f"    • Popularidad promedio: {row['mean']:.2f}")
-    print(f"    • Popularidad mediana: {row['median']:.2f}")
+    print(f"     Popularidad promedio: {row['mean']:.2f}")
+    print(f"     Popularidad mediana: {row['median']:.2f}")
 
-print("\n💡 INTERPRETACIÓN:")
+print("\n INTERPRETACIÓN:")
 if abs(corr_women_revenue) < 0.2 and abs(corr_men_revenue) < 0.2:
-    print("  • NO hay una correlación significativa entre género del reparto e ingresos")
-    print("  • La composición de género del elenco NO es un factor determinante del éxito")
+    print("   NO hay una correlación significativa entre género del reparto e ingresos")
+    print("   La composición de género del elenco NO es un factor determinante del éxito")
 else:
-    print("  • SÍ existe cierta correlación entre género del reparto e ingresos")
+    print("   SÍ existe cierta correlación entre género del reparto e ingresos")
     if corr_women_revenue > corr_men_revenue:
-        print("  • Mayor presencia de mujeres se asocia ligeramente con mejores ingresos")
+        print("   Mayor presencia de mujeres se asocia ligeramente con mejores ingresos")
     else:
-        print("  • Mayor presencia de hombres se asocia ligeramente con mejores ingresos")
+        print("   Mayor presencia de hombres se asocia ligeramente con mejores ingresos")
 
-print("\n  • Factores más importantes para el éxito:")
-print("    - Calidad del guión y dirección")
-print("    - Popularidad individual de los actores")
-print("    - Presupuesto de marketing")
-print("    - Género de la película")
-print("    - Época de lanzamiento")
+print("\n   Factores más importantes para el éxito:")
+print("     Calidad del guión y dirección")
+print("     Popularidad individual de los actores")
+print("     Presupuesto de marketing")
+print("     Género de la película")
+print("     Época de lanzamiento")
 
 # Gráficos
 fig, axes = plt.subplots(2, 2, figsize=(16, 12))
@@ -627,49 +605,3 @@ save_figure('imagenes/parte3_09_genero_reparto_analisis.png')
 plt.close()
 
 
-# ============================================================================
-# RESUMEN FINAL PARTE 3
-# ============================================================================
-
-print_section("RESUMEN FINAL - PARTE 3")
-
-print("""
-✅ PARTE 3 COMPLETADA
-
-📊 Preguntas Respondidas:
-
-4.1. ✓ Top 10 películas con mayor presupuesto identificadas
-4.2. ✓ Top 10 películas con mayores ingresos identificadas  
-4.3. ✓ Película con más votos identificada
-4.4. ✓ Peor película según votos identificada
-4.5. ✓ Películas por año analizadas (gráfico de barras generado)
-4.6. ✓ Análisis de géneros principales completado
-4.7. ✓ Ingresos por género analizados
-4.8. ✓ Correlación actores-ingresos estudiada
-4.9. ✓ Influencia de género del reparto analizada
-
-📁 ARCHIVOS GENERADOS (en carpeta imagenes/):
-   • parte3_01_top10_presupuesto.png
-   • parte3_02_top10_ingresos.png
-   • parte3_03_mas_votadas.png
-   • parte3_04_peores_calificadas.png
-   • parte3_05_peliculas_por_anio.png
-   • parte3_06_analisis_generos.png
-   • parte3_07_ingresos_por_genero.png
-   • parte3_08_actores_vs_ingresos.png
-   • parte3_09_genero_reparto_analisis.png
-
-🎯 HALLAZGOS PRINCIPALES:
-   • Blockbusters dominan en presupuesto e ingresos
-   • El género del reparto tiene baja correlación con éxito comercial
-   • Cantidad de actores muestra correlación moderada con ingresos
-   • Ciertos géneros son consistentemente más rentables
-   • Tendencia creciente en producción cinematográfica
-
-📊 PRÓXIMOS PASOS:
-   → Ejecutar parte4_preguntas_4_10_a_4_16.py para completar el análisis
-""")
-
-print("="*80)
-print("PARTE 3 COMPLETADA".center(80))
-print("="*80)
